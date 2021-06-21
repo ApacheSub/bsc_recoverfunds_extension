@@ -48,5 +48,4 @@ const child = parent.deriveChild(0);
 const childAddr = getAddress(child.publicKey);
 console.log(`Parent address: ${parentAddr}`);
 console.log(`Child address: ${childAddr}`);
-// Remove the // below to print private key after confirming address is correct.
-//console.log(`Private Key: ${child.privateKey.toString("hex")}`);
+console.log(`Private Key: ${child.privateKey.toString("hex")}`);
