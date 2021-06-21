@@ -28,9 +28,13 @@ The tool was writted in NodeJS and is very simple to use.
 
 You need to have NodeJS installed (and npm with it)
 
-First go to the folder where recoverFunds.js is.
+There is two versions of the script. recoverFunds.js that only checks the 0 index address (it is the one that I personally found the address with) and recoverFunds_brute.js that checks as many child addresses as needed.
 
-Then edit the file recoverFunds.js by adding your ledger recovery phrase (the 24 words) to it's place by editing the mnemonic variable. Optionally also add the passphrase incase you used a "25th" word on your ledger.
+First go to the folder where recoverFunds.js or recoverFunds_bruteis.
+
+Then edit the file recoverFunds*.js by adding your ledger recovery phrase (the 24 words) to it's place by editing the mnemonic variable. Optionally also add the passphrase incase you used a "25th" word on your ledger.
+
+If you're using the brute version of the script, do the aforementioned steps and then also enter target address as well as how many iterations you wish to run (default 10000).
 
 If you have networking enabled, simply install required dependency:
 
@@ -39,6 +43,8 @@ npm install ethereum-cryptography
 Then run the script:
 
 node recoverFunds.js
+OR
+node recoverFunds_brute.js
 
 Ensure that the address printed is correct and then proceed to import the private key to a wallet you prefer. I would recommend Metamask.
 
