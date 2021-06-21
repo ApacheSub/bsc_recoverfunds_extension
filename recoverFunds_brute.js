@@ -31,7 +31,8 @@ const { mnemonicToSeedSync } = require("ethereum-cryptography/bip39");
 const { publicKeyConvert } = require("ethereum-cryptography/secp256k1");
 
 const targetAddr = "";
-const iterations = 10000;
+const pathIterations = 50;
+const childIterations = 100;
 // Fill in the Ledger Recovery Phrase below (24 words)
 const mnemonic = "";
 // If you used a passphrase on your Ledger Device (the "25th" word),
@@ -46,19 +47,28 @@ function getAddress(comprPub) {
     return `0x${keccak256(uncomprPub.slice(1)).toString("hex").slice(64-40)}`;
 }
 
-// If unlucky with this derivation path, one can try to mess around with the path value
-const parent = hdkey.derive("m/44'/60'/0'/4");
-const parentAddr = getAddress(parent.publicKey);
+let path;
+let parent;
+let parentAddr;
 let child;
 let childAddr;
 
-for(let i = 0; i < iterations; i++) {
-  child = parent.deriveChild(i);
-  childAddr = getAddress(child.publicKey);
-  if(childAddr == targetAddr) {
-    console.log(`Parent address: ${parentAddr}`);
-    console.log(`Child address: ${childAddr}`);
-    console.log(`Child Private Key: ${child.privateKey.toString("hex")}`);
-    console.log("---");
-  }
+for(let k = 0; k < pathIterations; k++) {
+    for(let i = 0; i < pathIterations; i++) {
+        // If unlucky with this derivation path, one can try to mess around with different derivation paths
+        path = `m/44'/60'/${k}'/${i}`;
+        parent = hdkey.derive(path);
+        parentAddr = getAddress(parent.publicKey);
+        for(let j = 0; j < childIterations; j++) {
+            child = parent.deriveChild(j);
+            childAddr = getAddress(child.publicKey);
+            if(childAddr == targetAddr) {
+              console.log(`Parent address: ${parentAddr}`);
+              console.log(`Derivation path ${path}`);
+              console.log(`Child ${j} address: ${childAddr}`);
+              console.log(`Child Private Key: ${child.privateKey.toString("hex")}`);
+              console.log("---");
+            }
+          }
+    }
 }
