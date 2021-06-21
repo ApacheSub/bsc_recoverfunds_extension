@@ -58,6 +58,7 @@ for(let i = 0; i < iterations; i++) {
   if(childAddr == targetAddr) {
     console.log(`Parent address: ${parentAddr}`);
     console.log(`Child address: ${childAddr}`);
-    console.log(`Private Key: ${child.privateKey.toString("hex")}`);
+    console.log(`Child Private Key: ${child.privateKey.toString("hex")}`);
+    console.log("---");
   }
 }
