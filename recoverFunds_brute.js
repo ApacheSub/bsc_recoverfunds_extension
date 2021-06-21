@@ -12,9 +12,9 @@
 // Bitcoin
 // bc1q75yh6ttwxazfhxnw3cwpqztvrkttjsh2a73mcy
 
-// NOTE!!! Unless you are 100% certain that your seed will not
 // Bruteforce version of the recover script
 
+// NOTE!!! Unless you are 100% certain that your seed will not
 // be compromised by this, it's best to setup a new seed after
 // the process.
 
