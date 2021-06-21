@@ -1,7 +1,9 @@
 # bsc_recoverfunds_extension
 A repository for tool(s) to recover access to funds lost due to Binance Chain Wallet extension
 Discussion about issue:
+
 https://old.reddit.com/r/ledgerwallet/comments/nmr43f/psa_bug_in_binance_chain_wallet_chrome_extension/
+
 https://old.reddit.com/r/ledgerwallet/comments/mnj9vx/missing_address_for_binance_smart_chain_generated/
 
 This tool will help users who have lost funds due to the Binance Chain Wallet extension where
