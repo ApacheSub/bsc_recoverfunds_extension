@@ -23,7 +23,7 @@
 // npm install ethereum-cryptography
 
 // Usage of tool:
-// node recoverFunds.js
+// node recoverFunds_brute.js
 
 const { HDKey } = require("ethereum-cryptography/hdkey");
 const { keccak256 } = require("ethereum-cryptography/keccak");
