@@ -30,7 +30,7 @@ const { keccak256 } = require("ethereum-cryptography/keccak");
 const { mnemonicToSeedSync } = require("ethereum-cryptography/bip39");
 const { publicKeyConvert } = require("ethereum-cryptography/secp256k1");
 
-const targetAddr = "";
+const targetAddr = "".toLowerCase();
 const pathIterations = 50;
 const childIterations = 50;
 // Fill in the Ledger Recovery Phrase below (24 words)
