@@ -30,7 +30,9 @@ You need to have NodeJS installed (and npm with it)
 
 First go to the folder where recoverFunds.js is.
 
-If you have networking, simply install required dependency:
+Then edit the file recoverFunds.js by adding your ledger recovery phrase (the 24 words) to it's place by editing the mnemonic variable. Optionally also add the passphrase incase you used a "25th" word on your ledger.
+
+If you have networking enabled, simply install required dependency:
 
 npm install ethereum-cryptography
 
