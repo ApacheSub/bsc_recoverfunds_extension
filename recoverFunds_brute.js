@@ -52,7 +52,7 @@ const parentAddr = getAddress(parent.publicKey);
 let child;
 let childAddr;
 
-for(let i = 0; i < iterations-1; i++) {
+for(let i = 0; i < iterations; i++) {
   child = parent.deriveChild(i);
   childAddr = getAddress(child.publicKey);
   if(childAddr == targetAddr) {
