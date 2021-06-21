@@ -23,3 +23,19 @@ me to release it for everyone.
 
 // Bitcoin
 // bc1q75yh6ttwxazfhxnw3cwpqztvrkttjsh2a73mcy
+
+The tool was writted in NodeJS and is very simple to use.
+
+You need to have NodeJS installed (and npm with it)
+
+First go to the folder where recoverFunds.js is.
+
+If you have networking, simply install required dependency:
+
+npm install ethereum-cryptography
+
+Then:
+
+node recoverFunds.js
+
+If you do not have networking enabled, you could install the dependencies on another machine and safely move the node_modules folder or get the files from https://github.com/ethereum/js-ethereum-cryptography. Please note you might need to manually get the dependencies for that library aswell which is otherwise done by npm.
