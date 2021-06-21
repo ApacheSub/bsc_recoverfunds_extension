@@ -34,7 +34,7 @@ First go to the folder where recoverFunds.js or recoverFunds_bruteis.
 
 Then edit the file recoverFunds*.js by adding your ledger recovery phrase (the 24 words) to it's place by editing the mnemonic variable. Optionally also add the passphrase incase you used a "25th" word on your ledger.
 
-If you're using the brute version of the script, do the aforementioned steps and then also enter target address as well as how many iterations you wish to run (default 10000).
+If you're using the brute version of the script, do the aforementioned steps and then also enter target address as well as how many iterations you wish to run. Currently the script will be able to try different path values each ranging from 0...pathIterations. 0...childIterations children is derived for each path. If needed, it might be worthwhile to experiment with different kinds of paths depending on the use case. This script should give a good idea on how it all works.
 
 If you have networking enabled, simply install required dependency:
 
