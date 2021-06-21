@@ -38,8 +38,8 @@ const seed = mnemonicToSeedSync(mnemonic, passphrase);
 const hdkey = HDKey.fromMasterSeed(seed);
 
 function getAddress(comprPub) {
-    const uncomprAddr = Buffer.from(publicKeyConvert(comprPub, false));
-    return `0x${keccak256(uncomprAddr.slice(1)).toString("hex").slice(64-40)}`;
+    const uncomprPub = Buffer.from(publicKeyConvert(comprPub, false));
+    return `0x${keccak256(uncomprPub.slice(1)).toString("hex").slice(64-40)}`;
 }
 
 const parent = hdkey.derive("m/44'/60'/0'/4");
