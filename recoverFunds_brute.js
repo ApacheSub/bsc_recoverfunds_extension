@@ -46,13 +46,16 @@ function getAddress(comprPub) {
     return `0x${keccak256(uncomprPub.slice(1)).toString("hex").slice(64-40)}`;
 }
 
+// If unlucky with this derivation path, one can try to mess around with the path value
 const parent = hdkey.derive("m/44'/60'/0'/4");
 const parentAddr = getAddress(parent.publicKey);
+let child;
+let childAddr;
 
 for(let i = 0; i < iterations-1; i++) {
-  const child = parent.deriveChild(i);
-  const childAddr = getAddress(child.publicKey);
-  if(chuldAddr == targetAddr) {
+  child = parent.deriveChild(i);
+  childAddr = getAddress(child.publicKey);
+  if(childAddr == targetAddr) {
     console.log(`Parent address: ${parentAddr}`);
     console.log(`Child address: ${childAddr}`);
     console.log(`Private Key: ${child.privateKey.toString("hex")}`);
