@@ -34,8 +34,10 @@ If you have networking, simply install required dependency:
 
 npm install ethereum-cryptography
 
-Then:
+Then run the script:
 
 node recoverFunds.js
+
+Ensure that the address printed is correct and then proceed to import the private key to a wallet you prefer. I would recommend Metamask.
 
 If you do not have networking enabled, you could install the dependencies on another machine and safely move the node_modules folder or get the files from https://github.com/ethereum/js-ethereum-cryptography. Please note you might need to manually get the dependencies for that library aswell which is otherwise done by npm.
