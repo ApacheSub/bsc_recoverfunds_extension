@@ -32,7 +32,7 @@ const { publicKeyConvert } = require("ethereum-cryptography/secp256k1");
 
 const targetAddr = "";
 const pathIterations = 50;
-const childIterations = 100;
+const childIterations = 50;
 // Fill in the Ledger Recovery Phrase below (24 words)
 const mnemonic = "";
 // If you used a passphrase on your Ledger Device (the "25th" word),
