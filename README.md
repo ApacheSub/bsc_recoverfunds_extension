@@ -43,14 +43,17 @@ Then edit the file recoverFunds*.js by adding your ledger recovery phrase (the 2
 If you're using the brute version of the script, do the aforementioned steps and then also enter target address as well as how many iterations you wish to run. Currently the script will be able to try different path values each ranging from 0...pathIterations. 0...childIterations children is derived for each path. If needed, it might be worthwhile to experiment with different kinds of paths depending on the use case. This script should give a good idea on how it all works.
 
 If you have networking enabled, simply install required dependency:
-
+```
 npm install ethereum-cryptography
-
+```
 Then run the script:
-
+```
 node recoverFunds.js
+```
 OR
+```
 node recoverFunds_brute.js
+```
 
 Ensure that the address printed is correct and then proceed to import the private key to a wallet you prefer. I would recommend Metamask.
 
