@@ -1,6 +1,8 @@
 # bsc_recoverfunds_extension
 A repository for tool(s) to recover access to funds lost due to Binance Chain Wallet extension
 
+This tool will help if you have generated an address on the Binance Chain Wallet that does not let you spend the money although it will request Ledger to approve the transaction. It's due to the fact that in some cases the extension will generate an address using a different derivation path than intended. This tool will likely help give users recover that money.
+
 Discussion about issue:
 
 https://old.reddit.com/r/ledgerwallet/comments/nmr43f/psa_bug_in_binance_chain_wallet_chrome_extension/
