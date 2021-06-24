@@ -93,3 +93,5 @@ for(let k = 0; k < pathIterations; k++) {
     }
   }
 }
+
+console.log("Address was not found.");
