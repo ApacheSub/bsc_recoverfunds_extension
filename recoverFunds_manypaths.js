@@ -55,7 +55,7 @@ function getAddress(comprPub) {
 }
 
 function tryPath(p) {
-  parent = hdkey.derive(path);
+  parent = hdkey.derive(p);
   parentAddr = getAddress(parent.publicKey);
   for(let j = 0; j < childIterations; j++) {
     child = parent.deriveChild(j);
