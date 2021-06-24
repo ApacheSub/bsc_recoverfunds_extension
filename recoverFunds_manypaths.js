@@ -66,9 +66,10 @@ function tryPath(p) {
       console.log(`Child ${j} address: ${childAddr}`);
       console.log(`Child Private Key: ${child.privateKey.toString("hex")}`);
       console.log("---");
-      return;
+      return 1;
     }
   }
+  return 0;
 }
 
 let path;
@@ -79,13 +80,16 @@ let childAddr;
 
 for(let k = 0; k < pathIterations; k++) {
   let path = `m/44'/60'/${k}'`
-  tryPath(path);
+  let res = tryPath(path);
+  if(res === 1) { return; }
   for(let i = 0; i < pathIterations; i++) {
     path = `m/44'/60'/${k}'/${i}`;
-    tryPath(path);
+    res = tryPath(path);
+    if(res === 1) { return; }
     for(let j = 0; j < pathIterations; j++) {
       path = `m/44'/60'/${k}'/${i}/${j}`;
-      tryPath(path);
+      res = tryPath(path);
+      if(res === 1) { return; }
     }
   }
 }
