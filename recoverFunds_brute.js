@@ -30,14 +30,21 @@ const { keccak256 } = require("ethereum-cryptography/keccak");
 const { mnemonicToSeedSync } = require("ethereum-cryptography/bip39");
 const { publicKeyConvert } = require("ethereum-cryptography/secp256k1");
 
+// Fill in values for following variables:
+// Enter the address you want to find (the one where your funds are):
 const targetAddr = "".toLowerCase();
-const pathIterations = 50;
-const childIterations = 50;
 // Fill in the Ledger Recovery Phrase below (24 words)
 const mnemonic = "";
+
+// And optionally
 // If you used a passphrase on your Ledger Device (the "25th" word),
 // Enter it below or otherwise leave as is
 const passphrase = "";
+
+const pathIterations = 50;
+const childIterations = 50;
+
+
 
 const seed = mnemonicToSeedSync(mnemonic, passphrase);
 const hdkey = HDKey.fromMasterSeed(seed);
