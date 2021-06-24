@@ -68,6 +68,7 @@ for(let k = 0; k < pathIterations; k++) {
               console.log(`Child ${j} address: ${childAddr}`);
               console.log(`Child Private Key: ${child.privateKey.toString("hex")}`);
               console.log("---");
+              return;
             }
           }
     }
