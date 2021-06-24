@@ -62,7 +62,7 @@ function tryPath(p) {
     childAddr = getAddress(child.publicKey);
     if(childAddr == targetAddr) {
       console.log(`Parent address: ${parentAddr}`);
-      console.log(`Derivation path ${path}`);
+      console.log(`Derivation path ${p}`);
       console.log(`Child ${j} address: ${childAddr}`);
       console.log(`Child Private Key: ${child.privateKey.toString("hex")}`);
       console.log("---");
