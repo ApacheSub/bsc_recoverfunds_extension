@@ -78,13 +78,14 @@ let child;
 let childAddr;
 
 for(let k = 0; k < pathIterations; k++) {
-  tryPath(`m/44'/60'/${k}'`);
+  let path = `m/44'/60'/${k}'`
+  tryPath(path);
   for(let i = 0; i < pathIterations; i++) {
-    // If unlucky with this derivation path, one can try to mess around with different derivation paths
-    tryPath(`m/44'/60'/${k}'/${i}`);
-    tryPath(`m/44'/60'/${k}'/${i}`);
+    path = `m/44'/60'/${k}'/${i}`;
+    tryPath(path);
     for(let j = 0; j < pathIterations; j++) {
-      tryPath(`m/44'/60'/${k}'/${i}/${j}`);
+      path = `m/44'/60'/${k}'/${i}/${j}`;
+      tryPath(path);
     }
   }
 }
