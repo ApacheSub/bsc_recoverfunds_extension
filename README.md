@@ -56,6 +56,10 @@ OR
 ```
 node recoverFunds_brute.js
 ```
+OR
+```
+node recoverFunds_manypaths.js
+```
 
 Ensure that the address printed is correct and then proceed to import the private key to a wallet you prefer. I would recommend Metamask.
 
