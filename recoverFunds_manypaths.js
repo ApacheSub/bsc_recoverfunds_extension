@@ -20,51 +20,30 @@
 
 // Enter the following command to install required packages
 // !!! Or preferably copy them over to an offline device safely
-// npm install ethereum-cryptography
-
-// Usage of tool:
-// node recoverFunds_brute.js
+// npm install
 
 const { HDKey } = require("ethereum-cryptography/hdkey");
 const { keccak256 } = require("ethereum-cryptography/keccak");
 const { mnemonicToSeedSync } = require("ethereum-cryptography/bip39");
-const { publicKeyConvert } = require("ethereum-cryptography/secp256k1");
+const { getPublicKey } = require("ethereum-cryptography/secp256k1");
 
-// Fill in values for following variables:
-// Enter the address you want to find (the one where your funds are):
-const targetAddr = "".toLowerCase();
-// Fill in the Ledger Recovery Phrase below (24 words)
-const mnemonic = "";
+const { toHex } = require("ethereum-cryptography/utils");
 
-// And optionally
-// If you used a passphrase on your Ledger Device (the "25th" word),
-// Enter it below or otherwise leave as is
-const passphrase = "";
-
-const pathIterations = 50;
-const childIterations = 50;
-
-
-
-const seed = mnemonicToSeedSync(mnemonic, passphrase);
-const hdkey = HDKey.fromMasterSeed(seed);
-
-function getAddress(comprPub) {
-    const uncomprPub = Buffer.from(publicKeyConvert(comprPub, false));
-    return `0x${keccak256(uncomprPub.slice(1)).toString("hex").slice(64-40)}`;
+function getAddress(privateKey) {
+  const uncomprPub = getPublicKey(privateKey, false);
+  return `0x${toHex(keccak256(uncomprPub.slice(1)).slice(-20))}`;
 }
 
-function tryPath(p) {
-  parent = hdkey.derive(p);
-  parentAddr = getAddress(parent.publicKey);
+function tryPath(parent, path, targetAddr, childIterations = 50) {
+  parentAddr = getAddress(parent.privateKey);
   for(let j = 0; j < childIterations; j++) {
     child = parent.deriveChild(j);
-    childAddr = getAddress(child.publicKey);
+    childAddr = getAddress(child.privateKey);
     if(childAddr == targetAddr) {
       console.log(`Parent address: ${parentAddr}`);
-      console.log(`Derivation path ${p}`);
+      console.log(`Derivation path ${path}/${child.index}`);
       console.log(`Child ${j} address: ${childAddr}`);
-      console.log(`Child Private Key: ${child.privateKey.toString("hex")}`);
+      console.log(`Child Private Key: 0x${toHex(child.privateKey)}`);
       console.log("---");
       return 1;
     }
@@ -72,26 +51,31 @@ function tryPath(p) {
   return 0;
 }
 
-let path;
-let parent;
-let parentAddr;
-let child;
-let childAddr;
+function findAddress(mnemonic, targetAddr, passphrase = "") {
+  const pathIterations = 50;
 
-for(let k = 0; k < pathIterations; k++) {
-  let path = `m/44'/60'/${k}'`
-  let res = tryPath(path);
-  if(res === 1) { return; }
-  for(let i = 0; i < pathIterations; i++) {
-    path = `m/44'/60'/${k}'/${i}`;
-    res = tryPath(path);
+  const seed = mnemonicToSeedSync(mnemonic, passphrase);
+  const hdkey = HDKey.fromMasterSeed(seed);
+
+  let path;
+  let res;
+
+  for(let k = 0; k < pathIterations; k++) {
+    path = `m/44'/60'/${k}'`
+    res = tryPath(hdkey.derive(path), path, targetAddr);
     if(res === 1) { return; }
-    for(let j = 0; j < pathIterations; j++) {
-      path = `m/44'/60'/${k}'/${i}/${j}`;
-      res = tryPath(path);
+    for(let i = 0; i < pathIterations; i++) {
+      path = `m/44'/60'/${k}'/${i}`;
+      res = tryPath(hdkey.derive(path), path, targetAddr);
       if(res === 1) { return; }
+      for(let j = 0; j < pathIterations; j++) {
+        path = `m/44'/60'/${k}'/${i}/${j}`;
+        res = tryPath(path, targetAddr);
+        if(res === 1) { return; }
+      }
     }
   }
+  console.log("Address was not found.");
 }
 
-console.log("Address was not found.");
+module.exports = { findAddress }

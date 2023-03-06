@@ -1,0 +1,22 @@
+{
+  "name": "bsc_recoverfunds_extension",
+  "version": "1.0.0",
+  "description": "Tool(s) to recover access to funds lost due to Binance Chain Wallet extension",
+  "main": "index.js",
+  "scripts": {
+    "search": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ApacheSub/bsc_recoverfunds_extension.git"
+  },
+  "author": "",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/ApacheSub/bsc_recoverfunds_extension/issues"
+  },
+  "homepage": "https://github.com/ApacheSub/bsc_recoverfunds_extension#readme",
+  "dependencies": {
+    "ethereum-cryptography": "^1.2.0"
+  }
+}
