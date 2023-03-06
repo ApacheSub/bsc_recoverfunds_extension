@@ -42,11 +42,11 @@ First go to the folder where index.js is
 
 1. Open index.js in your favorite text editor
 2. Edit the targetAddr variable with the address your funds are in e.g. the address you need private key for
-3. Add your ledger recovery phrase (the 24 words) to it's place by editing the mnemonic variable
+3. Add your ledger recovery phrase (the 24 words) to its place by editing the mnemonic variable
 4. Optionally also add the passphrase incase you used a "25th" word on your ledger.
-
+5. Save the file
+6. 
 If you have networking enabled, simply install required dependencies:
-
 ```
 npm install
 ```
@@ -57,7 +57,6 @@ node index.js
 ```
 
 OR the example script
-
 ```
 node example_index.js
 ```
