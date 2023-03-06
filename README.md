@@ -2,7 +2,7 @@
 
 A repository for tool(s) to recover access to funds lost due to Binance Chain Wallet extension
 
-This tool will help if you have generated an address on the Binance Chain Wallet that does not let you spend the money although it will request Ledger to approve the transaction. It's due to the fact that in some cases the extension will generate an address using a different derivation path than intended. This tool will likely help give users recover that money.
+This tool will help if you have generated an address on the Binance Chain Wallet that does not let you spend the money although it will request Ledger to approve the transaction. It's due to the fact that in some cases the extension will generate an address using a different derivation path than intended. This tool will likely help users recover that money.
 
 **NOTE: The tool may be helpful in other scenarios also, for example, when seeking an ethereum address path that was used and can't be found otherwise**
 
