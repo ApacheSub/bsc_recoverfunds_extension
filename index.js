@@ -28,8 +28,8 @@ const MNEMONIC = "REPLACETHISWITHMNEMONIC";
 const PASSPHRASE = "";
 
 const MAX_DEPTH = 2;
-const MAX_PATH_INDEX = 100;
-const MAX_CHILD_INDEX = 100;
+const MAX_PATH_INDEX = 20;
+const MAX_CHILD_INDEX = 20;
 
 let finder = new AddressFinder(MNEMONIC, PASSPHRASE, MAX_DEPTH, MAX_PATH_INDEX, MAX_CHILD_INDEX);
 finder.findAddress(TARGET_ADDR);

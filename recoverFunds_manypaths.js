@@ -12,16 +12,6 @@
 // Bitcoin
 // bc1q75yh6ttwxazfhxnw3cwpqztvrkttjsh2a73mcy
 
-// Bruteforce version of the recover script
-
-// NOTE!!! Unless you are 100% certain that your seed will not
-// be compromised by this, it's best to setup a new seed after
-// the process.
-
-// Enter the following command to install required packages
-// !!! Or preferably copy them over to an offline device safely
-// npm install
-
 const { HDKey } = require("ethereum-cryptography/hdkey");
 const { keccak256 } = require("ethereum-cryptography/keccak");
 const { mnemonicToSeedSync } = require("ethereum-cryptography/bip39");
@@ -37,10 +27,7 @@ class AddressFinder {
   #maxPathIndex;
   #maxChildIndex;
   
-  // Not needed currently
-  //#alphabet = [...Array(26).keys()].map((n) => String.fromCharCode(97 + n));
   #regularPaths = [
-    // Derivation path not supported by the ethereum-cryptography library
     ["m/44'/60'/0'/", ""],
     ["m/44'/60'/", "'/0/0"],
     ["m/44'/60'/0'/0/", ""]
@@ -68,6 +55,7 @@ class AddressFinder {
   }
 
   #tryPath(path, targetAddr) {
+    console.log(`Checking path ${path}`);
     let parent = this.#hdkey.derive(path);
     let parentAddr = this.#getAddress(parent.privateKey);
     if(parentAddr === targetAddr) { 
@@ -90,7 +78,7 @@ class AddressFinder {
     for(const element of this.#regularPaths) {
       for(let i = 0; i <= this.#maxPathIndex; i++) {
         if(this.#tryPath(element[0] + i + element[1], targetAddr) === 1) {
-          return;     
+          return;
         };
       }
     };
@@ -104,7 +92,7 @@ class AddressFinder {
         this.#tryPath(`${path}${index}'`, targetAddr) === 1) {
           return;
         }
-        // Add path back to the array as long as maxPathIndex 
+        // Add path back to the array as long as maxPathIndex
         // will not be exceeded
         if(index < this.#maxPathIndex) { paths.push([path, index+1, depth]); }
         // Increase depth of current path if maxDepth not exceeded
