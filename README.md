@@ -69,7 +69,7 @@ If you do not have networking enabled, you could install the dependencies on ano
 
 There are 3 customization options to cover more ground in the search.
 
-1. MAX_DEPTH variable will make add more depth to the paths that are searched
+1. MAX_DEPTH variable will add more depth to the paths that are searched
 
 Default depth is 2. Updating this variable will dramatically increase the runtime but
 incase address is generated using some very weird path, it may be useful.
