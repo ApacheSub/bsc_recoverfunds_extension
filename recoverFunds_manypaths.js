@@ -78,10 +78,11 @@ class AddressFinder {
     for(const element of this.#regularPaths) {
       for(let i = 0; i <= this.#maxPathIndex; i++) {
         if(this.#tryPath(element[0] + i + element[1], targetAddr) === 1) {
-          return;
+          return true;
         };
       }
     };
+    return false;
   }
 
   // This function will exceed call stack eventually if used but will be left here for future reference
@@ -130,8 +131,9 @@ class AddressFinder {
   }
 
   findAddress(targetAddr) {
-    this.#tryRegularPaths(targetAddr);
-    this.#tryIrregularPaths(targetAddr);
+    if(!this.#tryRegularPaths(targetAddr)) {
+      this.#tryIrregularPaths(targetAddr);
+    }
     // Example of adding another coin type to be recursed
     //this.#tryIrregularPaths(targetAddr, [["m/44'/60'/", 0, 0], ["m/44'/61'/", 0, 0]]);
   }
