@@ -81,14 +81,16 @@ While path m/44'/60'/0'/0/0/0 has a depth of 3
 
 2. MAX_PATH_INDEX variable covers more path indices
 
-By default it is 100.
+By default it is 20.
 
 For example with MAX_PATH_INDEX=100, the program checks paths until m/44'/60'/100'/100/100
 
 3. MAX_CHILD_INDEX variable covers more child addresses
 
+By default it is 20.
+
 For each parent address, this variable is the amount of child indices that are checked
 
 For example, for parent path m/44'/60'/100'/100/100, child indices will be checked from
 
-m/44'/60'/100'/100/100/0 ... m/44'/60'/100'/100/100/100
+m/44'/60'/100'/100/100/0 ... m/44'/60'/100'/100/100/20

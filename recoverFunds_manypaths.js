@@ -84,6 +84,7 @@ class AddressFinder {
     };
   }
 
+  // This function will exceed call stack eventually if used but will be left here for future reference
   #recurseIrregularPaths(targetAddr, paths = [["m/44'/60'/", 0, 0]]) {
     if(paths.length > 0) {
       const [path, index, depth] = paths.pop();
@@ -96,7 +97,7 @@ class AddressFinder {
         // will not be exceeded
         if(index < this.#maxPathIndex) { paths.push([path, index+1, depth]); }
         // Increase depth of current path if maxDepth not exceeded
-        if(depth <= this.#maxDepth) {
+        if(depth < this.#maxDepth) {
           paths.push([`${path}${index}/`, 0, depth+1]);
           paths.push([`${path}${index}'/`, 0, depth+1]);
         }
@@ -107,11 +108,32 @@ class AddressFinder {
     }
   }
 
+  // An updated version of above function, this time with iteration
+  #tryIrregularPaths(targetAddr, paths = [["m/44'/60'/", 0, 0]]) {
+    while(paths.length > 0) {
+      const [path, index, depth] = paths.pop();
+      if(index <= this.#maxPathIndex) {
+        if(this.#tryPath(`${path}${index}`, targetAddr) === 1 ||
+        this.#tryPath(`${path}${index}'`, targetAddr) === 1) {
+          return;
+        }
+        // Add path back to the array as long as maxPathIndex
+        // will not be exceeded
+        if(index < this.#maxPathIndex) { paths.push([path, index+1, depth]); }
+        // Increase depth of current path if maxDepth not exceeded
+        if(depth < this.#maxDepth) {
+          paths.push([`${path}${index}/`, 0, depth+1]);
+          paths.push([`${path}${index}'/`, 0, depth+1]);
+        }
+      }
+    }
+  }
+
   findAddress(targetAddr) {
     this.#tryRegularPaths(targetAddr);
-    this.#recurseIrregularPaths(targetAddr);
+    this.#tryIrregularPaths(targetAddr);
     // Example of adding another coin type to be recursed
-    //this.#recurseIrregularPaths(targetAddr, [["m/44'/60'/", 0, 0], ["m/44'/61'/", 0, 0]]);
+    //this.#tryIrregularPaths(targetAddr, [["m/44'/60'/", 0, 0], ["m/44'/61'/", 0, 0]]);
   }
 
 }
