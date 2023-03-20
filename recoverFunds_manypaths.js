@@ -135,11 +135,11 @@ class AddressFinder {
     if(!this.#tryRegularPaths(targetAddr)) {
       return this.#tryIrregularPaths(targetAddr);
     }
-    return false;
+    return true;
     // Example of adding another coin type to be recursed
     //this.#tryIrregularPaths(targetAddr, [["m/44'/60'/", 0, 0], ["m/44'/61'/", 0, 0]]);
   }
 
 }
 
-module.exports = { AddressFinder }
+module.exports = AddressFinder;
