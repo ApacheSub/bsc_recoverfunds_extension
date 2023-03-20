@@ -26,7 +26,7 @@ class AddressFinder {
   #maxDepth;
   #maxPathIndex;
   #maxChildIndex;
-  
+
   #regularPaths = [
     ["m/44'/60'/0'/", ""],
     ["m/44'/60'/", "'/0/0"],
@@ -58,7 +58,7 @@ class AddressFinder {
     console.log(`Checking path ${path}`);
     let parent = this.#hdkey.derive(path);
     let parentAddr = this.#getAddress(parent.privateKey);
-    if(parentAddr === targetAddr) { 
+    if(parentAddr === targetAddr) {
       this.#printResult(parentAddr, path, parent.privateKey);
       return 1;
     }
@@ -92,7 +92,7 @@ class AddressFinder {
       if(index <= this.#maxPathIndex) {
         if(this.#tryPath(`${path}${index}`, targetAddr) === 1 ||
         this.#tryPath(`${path}${index}'`, targetAddr) === 1) {
-          return;
+          return true;
         }
         // Add path back to the array as long as maxPathIndex
         // will not be exceeded
@@ -105,7 +105,7 @@ class AddressFinder {
         return this.#recurseIrregularPaths(targetAddr, paths);
       }
     } else {
-      return;
+      return false;
     }
   }
 
@@ -116,7 +116,7 @@ class AddressFinder {
       if(index <= this.#maxPathIndex) {
         if(this.#tryPath(`${path}${index}`, targetAddr) === 1 ||
         this.#tryPath(`${path}${index}'`, targetAddr) === 1) {
-          return;
+          return true;
         }
         // Add path back to the array as long as maxPathIndex
         // will not be exceeded
@@ -128,12 +128,14 @@ class AddressFinder {
         }
       }
     }
+    return false;
   }
 
   findAddress(targetAddr) {
     if(!this.#tryRegularPaths(targetAddr)) {
-      this.#tryIrregularPaths(targetAddr);
+      return this.#tryIrregularPaths(targetAddr);
     }
+    return false;
     // Example of adding another coin type to be recursed
     //this.#tryIrregularPaths(targetAddr, [["m/44'/60'/", 0, 0], ["m/44'/61'/", 0, 0]]);
   }
