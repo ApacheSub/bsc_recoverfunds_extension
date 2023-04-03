@@ -34,6 +34,8 @@ bc1q75yh6ttwxazfhxnw3cwpqztvrkttjsh2a73mcy
 
 ## Instructions
 
+NOTE: Make sure you are running a recent version of NodeJS (Version 18+ preferably)
+
 The tool was written in NodeJS and is very simple to use.
 
 You need to have NodeJS installed (and npm with it)
